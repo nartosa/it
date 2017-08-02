@@ -10,7 +10,7 @@ import com.wangzhixuan.mapper.UserMapper;
 import com.wangzhixuan.model.User;
 
 @Service
-public class TestService {
+public class TestaService {
     @Autowired
     private UserMapper userMapper;
 	

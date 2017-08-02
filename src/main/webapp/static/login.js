@@ -42,12 +42,13 @@ $(function () {
     // 验证码
     $("#captcha").click(function() {
         var $this = $(this);
+        debugger;
         var url = $this.data("src") + new Date().getTime();
         $this.attr("src", url);
     });
     // 登录
     $('#loginform').form({
-        url: basePath + '/login',
+    	url: basePath + '/login',
         onSubmit : function() {
             progressLoad();
             var isValid = $(this).form('validate');
