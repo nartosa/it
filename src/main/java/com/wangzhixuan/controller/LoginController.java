@@ -54,6 +54,78 @@ public class LoginController extends BaseController
 	{
 		return "index";
 	}
+	
+	/**
+	 * bid页面
+	 *
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/bid")
+	public String bid(Model model)
+	{
+		return "bid";
+	}
+	
+	/**
+	 * recruitment页面
+	 *
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/recruitment")
+	public String recruitment(Model model)
+	{
+		return "recruitment";
+	}
+	
+	/**
+	 * project页面
+	 *
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/project")
+	public String project(Model model)
+	{
+		return "project";
+	}
+	
+	/**
+	 * capital页面
+	 *
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/capital")
+	public String capital(Model model)
+	{
+		return "capital";
+	}
+	
+	/**
+	 * operation页面
+	 *
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/operation")
+	public String operation(Model model)
+	{
+		return "operation";
+	}
+	
+	/**
+	 * dataAnalysis页面
+	 *
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/dataAnalysis")
+	public String dataAnalysis(Model model)
+	{
+		return "dataAnalysis";
+	}
 
 	/**
 	 * GET 登录
