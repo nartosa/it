@@ -24,7 +24,7 @@ import com.wangzhixuan.commons.utils.StringUtils;
 
 /**
  * @description：登录退出
- * @author：zhixuan.wang @date：2015/10/1 14:51
+ * @date：2015/10/1 14:51
  */
 @Controller
 public class LoginController extends BaseController
@@ -40,7 +40,7 @@ public class LoginController extends BaseController
 	@GetMapping("/")
 	public String index()
 	{
-		return "redirect:/index1";
+		return "redirect:/login";
 	}
 
 	/**

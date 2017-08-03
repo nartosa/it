@@ -42,13 +42,12 @@ $(function () {
     // 验证码
     $("#captcha").click(function() {
         var $this = $(this);
-        debugger;
         var url = $this.data("src") + new Date().getTime();
         $this.attr("src", url);
     });
     // 登录
     $('#loginform').form({
-    	url: basePath + '/login',
+        url: basePath + '/login',
         onSubmit : function() {
             progressLoad();
             var isValid = $(this).form('validate');
@@ -61,7 +60,7 @@ $(function () {
             progressClose();
             result = $.parseJSON(result);
             if (result.success) {
-                window.location.href = basePath + '/index';
+            		window.location.href = basePath + '/index';
             }else{
                 // 刷新验证码
                 $("#captcha")[0].click();
