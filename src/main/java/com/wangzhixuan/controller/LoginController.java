@@ -23,8 +23,7 @@ import com.wangzhixuan.commons.shiro.captcha.DreamCaptcha;
 import com.wangzhixuan.commons.utils.StringUtils;
 
 /**
- * @description：登录退出
- * @date：2015/10/1 14:51
+ * @description：登录退出 @date：2015/10/1 14:51
  */
 @Controller
 public class LoginController extends BaseController
@@ -54,7 +53,7 @@ public class LoginController extends BaseController
 	{
 		return "index";
 	}
-	
+
 	/**
 	 * bid页面
 	 *
@@ -66,7 +65,7 @@ public class LoginController extends BaseController
 	{
 		return "bid";
 	}
-	
+
 	/**
 	 * recruitment页面
 	 *
@@ -78,7 +77,7 @@ public class LoginController extends BaseController
 	{
 		return "recruitment";
 	}
-	
+
 	/**
 	 * project页面
 	 *
@@ -90,7 +89,7 @@ public class LoginController extends BaseController
 	{
 		return "project";
 	}
-	
+
 	/**
 	 * capital页面
 	 *
@@ -102,7 +101,7 @@ public class LoginController extends BaseController
 	{
 		return "capital";
 	}
-	
+
 	/**
 	 * operation页面
 	 *
@@ -114,7 +113,7 @@ public class LoginController extends BaseController
 	{
 		return "operation";
 	}
-	
+
 	/**
 	 * dataAnalysis页面
 	 *
@@ -139,9 +138,6 @@ public class LoginController extends BaseController
 		logger.info("GET请求登录");
 		if (SecurityUtils.getSubject().isAuthenticated())
 		{
-			Subject user = SecurityUtils.getSubject();
-			boolean b = user.hasRole("admin");
-			System.err.println(b);
 			return "redirect:/index";
 		}
 		return "login";
@@ -164,6 +160,7 @@ public class LoginController extends BaseController
 	{
 		logger.info("POST请求登录");
 		// 改为全部抛出异常，避免ajax csrf token被刷新
+
 		if (StringUtils.isBlank(username))
 		{
 			throw new RuntimeException("用户名不能为空");
@@ -181,17 +178,13 @@ public class LoginController extends BaseController
 			throw new RuntimeException("验证码错误");
 		}
 		Subject user = SecurityUtils.getSubject();
-		boolean b = user.hasRole("1");
-		System.err.println(b);
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		// 设置记住密码
+
 		token.setRememberMe(1 == rememberMe);
 		try
 		{
 			user.login(token);
-			Subject user1 = SecurityUtils.getSubject();
-			boolean a = user1.hasRole("admin");
-			System.err.println(a);
 			return renderSuccess();
 		}
 		catch (UnknownAccountException e)
