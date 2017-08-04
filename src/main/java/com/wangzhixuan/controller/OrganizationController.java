@@ -18,7 +18,6 @@ import com.wangzhixuan.service.IOrganizationService;
 
 /**
  * @description：部门管理
- * @author：zhixuan.wang
  * @date：2015/10/1 14:51
  */
 @Controller
