@@ -200,7 +200,7 @@
     function searchBidFun() {
         bidDataGrid.datagrid('load', $.serializeObject($('#searchBidForm')));
     }
-    function cleanProjectFun() {
+    function cleanBidFun() {
         $('#searchBidForm input').val('');
         $('#searchBidForm select').val('全部');
         userDataGrid.datagrid('load', {});
