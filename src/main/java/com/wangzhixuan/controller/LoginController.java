@@ -60,10 +60,10 @@ public class LoginController extends BaseController
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/bid")
+	@GetMapping("/admin/bid/bid")
 	public String bid(Model model)
 	{
-		return "bid";
+		return "/admin/bid/bid";
 	}
 
 	/**
@@ -72,10 +72,10 @@ public class LoginController extends BaseController
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/recruitment")
+	@GetMapping("/admin/recruitment/recruitment")
 	public String recruitment(Model model)
 	{
-		return "recruitment";
+		return "/admin/recruitment/recruitment";
 	}
 
 	/**
@@ -84,10 +84,10 @@ public class LoginController extends BaseController
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/project")
+	@GetMapping("/admin/project/project")
 	public String project(Model model)
 	{
-		return "project";
+		return "/admin/project/project";
 	}
 
 	/**
@@ -96,10 +96,10 @@ public class LoginController extends BaseController
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/capital")
+	@GetMapping("/admin/capital/capital")
 	public String capital(Model model)
 	{
-		return "capital";
+		return "/admin/capital/capital";
 	}
 
 	/**
@@ -108,10 +108,10 @@ public class LoginController extends BaseController
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/operation")
+	@GetMapping("/admin/operation/operation")
 	public String operation(Model model)
 	{
-		return "operation";
+		return "/admin/operation/operation";
 	}
 
 	/**
@@ -120,10 +120,10 @@ public class LoginController extends BaseController
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/dataAnalysis")
+	@GetMapping("/admin/dataAnalysis/dataAnalysis")
 	public String dataAnalysis(Model model)
 	{
-		return "dataAnalysis";
+		return "/admin/dataAnalysis/dataAnalysis";
 	}
 
 	/**

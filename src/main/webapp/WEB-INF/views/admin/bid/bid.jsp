@@ -17,7 +17,7 @@
         });
 
         projectDataGrid = $('#projectDataGrid').datagrid({
-            url : '${path }/project/dataGrid',
+            url : '${path }/user/dataGrid',
             fit : true,
             striped : true,
             rownumbers : true,
@@ -30,10 +30,10 @@
             pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
             columns : [ [ {
                 width : '80',
-                title : '登录名',
-                field : 'loginName',
+                title : '项目名称',
+                field : 'projectName',
                 sortable : true
-            }, {
+            }/* , {
                 width : '80',
                 title : '姓名',
                 field : 'name',
@@ -93,17 +93,19 @@
                     }
                     return "未知类型";
                 }
-            },{
-                width : '60',
-                title : '状态',
+            } */,{
+                width : '80',
+                title : '项目状态',
                 field : 'status',
                 sortable : true,
                 formatter : function(value, row, index) {
                     switch (value) {
                     case 0:
-                        return '正常';
+                        return '竞标中';
                     case 1:
-                        return '停用';
+                        return '竞标成功';
+                    case 2:
+                        return '竞标失败';
                     }
                 }
             } , {
@@ -123,8 +125,8 @@
                 }
             }] ],
             onLoadSuccess:function(data){
-                $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑'});
-                $('.user-easyui-linkbutton-del').linkbutton({text:'删除'});
+                $('.project-easyui-linkbutton-edit').linkbutton({text:'编辑'});
+                $('.project-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
             toolbar : '#projectToolbar'
         });
