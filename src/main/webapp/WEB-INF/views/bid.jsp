@@ -16,7 +16,7 @@
             }
         });
 
-        userDataGrid = $('#projectDataGrid').datagrid({
+        projectDataGrid = $('#projectDataGrid').datagrid({
             url : '${path }/project/dataGrid',
             fit : true,
             striped : true,
