@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
-    var userDataGrid;
+    var projectDataGrid;
     var organizationTree;
 
     $(function() {
@@ -16,8 +16,8 @@
             }
         });
 
-        userDataGrid = $('#userDataGrid').datagrid({
-            url : '${path }/user/dataGrid',
+        userDataGrid = $('#projectDataGrid').datagrid({
+            url : '${path }/project/dataGrid',
             fit : true,
             striped : true,
             rownumbers : true,
@@ -113,11 +113,11 @@
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/user/edit">
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editUserFun(\'{0}\');" >编辑</a>', row.id);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil icon-blue\'" onclick="editProjectFun(\'{0}\');" >编辑</a>', row.id);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/user/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteUserFun(\'{0}\');" >删除</a>', row.id);
+                            str += $.formatString('<a href="javascript:void(0)" class="user-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x icon-red\'" onclick="deleteProjectFun(\'{0}\');" >删除</a>', row.id);
                         </shiro:hasPermission>
                     return str;
                 }
@@ -126,30 +126,30 @@
                 $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑'});
                 $('.user-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
-            toolbar : '#userToolbar'
+            toolbar : '#projectToolbar'
         });
     });
     
-    function addUserFun() {
+    function addProjectFun() {
         parent.$.modalDialog({
             title : '添加',
             width : 500,
             height : 300,
-            href : '${path }/user/addPage',
+            href : '${path }/project/addPage',
             buttons : [ {
                 text : '添加',
                 handler : function() {
                     parent.$.modalDialog.openner_dataGrid = userDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-                    var f = parent.$.modalDialog.handler.find('#userAddForm');
+                    var f = parent.$.modalDialog.handler.find('#userProjectForm');
                     f.submit();
                 }
             } ]
         });
     }
     
-    function deleteUserFun(id) {
+    function deleteProjectFun(id) {
         if (id == undefined) {//点击右键菜单才会触发这个
-            var rows = userDataGrid.datagrid('getSelections');
+            var rows = projectDataGrid.datagrid('getSelections');
             id = rows[0].id;
         } else {//点击操作里面的删除图标会触发这个
             userDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
@@ -157,12 +157,12 @@
         parent.$.messager.confirm('询问', '您是否要删除当前用户？', function(b) {
             if (b) {
                 progressLoad();
-                $.post('${path }/user/delete', {
+                $.post('${path }/project/delete', {
                     id : id
                 }, function(result) {
                     if (result.success) {
                         parent.$.messager.alert('提示', result.msg, 'info');
-                        userDataGrid.datagrid('reload');
+                        projectDataGrid.datagrid('reload');
                     } else {
                         parent.$.messager.alert('错误', result.msg, 'error');
                     }
@@ -172,9 +172,9 @@
         });
     }
     
-    function editUserFun(id) {
+    function editProjectFun(id) {
         if (id == undefined) {
-            var rows = userDataGrid.datagrid('getSelections');
+            var rows = projectDataGrid.datagrid('getSelections');
             id = rows[0].id;
         } else {
             userDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
@@ -183,30 +183,30 @@
             title : '编辑',
             width : 500,
             height : 300,
-            href : '${path }/user/editPage?id=' + id,
+            href : '${path }/project/editPage?id=' + id,
             buttons : [ {
                 text : '确定',
                 handler : function() {
-                    parent.$.modalDialog.openner_dataGrid = userDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-                    var f = parent.$.modalDialog.handler.find('#userEditForm');
+                    parent.$.modalDialog.openner_dataGrid = projectDataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+                    var f = parent.$.modalDialog.handler.find('#projectEditForm');
                     f.submit();
                 }
             } ]
         });
     }
     
-    function searchUserFun() {
-        userDataGrid.datagrid('load', $.serializeObject($('#searchUserForm')));
+    function searchProjectFun() {
+        userDataGrid.datagrid('load', $.serializeObject($('#searchProjcetForm')));
     }
-    function cleanUserFun() {
-        $('#searchUserForm input').val('');
-        $('#searchUserForm select').val('全部');
+    function cleanProjectFun() {
+        $('#searchProjcetForm input').val('');
+        $('#searchProjcetForm select').val('全部');
         userDataGrid.datagrid('load', {});
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'north',border:false" style="height: 30px; overflow: hidden;background-color: #fff">
-        <form id="searchUserForm">
+        <form id="searchProjcetForm">
             <table>
                 <tr>
                     <th>项目名称:</th>
@@ -224,8 +224,8 @@
                     <td>
                         <input name="createdateStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至
                         <input  name="createdateEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
-                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchUserFun();">查询</a>
-                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanUserFun();">清空</a>
+                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-magnifying-glass',plain:true" onclick="searchProjectFun();">查询</a>
+                        <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-x-circle',plain:true" onclick="cleanProjectFun();">清空</a>
                         <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'fi-plus',plain:true" onclick="addProjectFun();">项目新增</a>
                     </td>
                     
@@ -240,8 +240,8 @@
         <ul id="projectTree" style="width:160px;margin: 10px 10px 10px 10px"></ul>
     </div>
 </div>
-<div id="userToolbar" style="display: none;">
-    <shiro:hasPermission name="/user/add">
-        <a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
+<div id="projectToolbar" style="display: none;">
+    <shiro:hasPermission name="/project/add">
+        <a onclick="addProjectFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
 </div>
