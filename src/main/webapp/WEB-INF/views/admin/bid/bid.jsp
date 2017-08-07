@@ -5,12 +5,12 @@
     var organizationTree;
 
     $(function() {
-        organizationTree = $('#organizationTree').tree({
+        organizationTree = $('#bidTree').tree({
             url : '${path }/organization/tree',
             parentField : 'pid',
             lines : true,
             onClick : function(node) {
-                userDataGrid.datagrid('load', {
+                bidDataGrid.datagrid('load', {
                     organizationId: node.id
                 });
             }
