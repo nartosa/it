@@ -16,7 +16,7 @@
             }
         });
 
-        projectDataGrid = $('#bidDataGrid').datagrid({
+        bidDataGrid = $('#bidDataGrid').datagrid({
             url : '${path }/user/dataGrid',
             fit : true,
             striped : true,
@@ -33,26 +33,26 @@
                 title : '项目名称',
                 field : 'projectName',
                 sortable : true
-            }/* , {
+            },/*{
                 width : '80',
-                title : '姓名',
+                title : 'xxx',
                 field : 'name',
                 sortable : true
             },{
                 width : '80',
-                title : '部门ID',
+                title : 'xxx',
                 field : 'organizationId',
                 hidden : true
             },{
                 width : '80',
-                title : '所属部门',
+                title : 'xxx',
                 field : 'organizationName'
             },{
                 width : '130',
-                title : '创建时间',
+                title : 'xxx',
                 field : 'createTime',
                 sortable : true
-            },  {
+            },{
                 width : '40',
                 title : '性别',
                 field : 'sex',
@@ -65,22 +65,22 @@
                         return '女';
                     }
                 }
-            }, {
+            },{
                 width : '40',
-                title : '年龄',
+                title : 'xxx',
                 field : 'age',
                 sortable : true
             },{
                 width : '120',
-                title : '电话',
+                title : 'xxx',
                 field : 'phone',
                 sortable : true
             }, 
             {
                 width : '200',
-                title : '角色',
+                title : 'xxx',
                 field : 'rolesList'
-            }, {
+            },{
                 width : '60',
                 title : '用户类型',
                 field : 'userType',
@@ -93,11 +93,11 @@
                     }
                     return "未知类型";
                 }
-            } */,{
+            }, */{
                 width : '80',
                 title : '项目状态',
                 field : 'status',
-                sortable : true,
+                sortable : false,
                 formatter : function(value, row, index) {
                     switch (value) {
                     case 0:
@@ -108,7 +108,7 @@
                         return '竞标失败';
                     }
                 }
-            } , {
+            },{
                 field : 'action',
                 title : '操作',
                 width : 130,
@@ -123,7 +123,7 @@
                         </shiro:hasPermission>
                     return str;
                 }
-            }] ],
+            }]],
             onLoadSuccess:function(data){
                 $('.project-easyui-linkbutton-edit').linkbutton({text:'编辑'});
                 $('.project-easyui-linkbutton-del').linkbutton({text:'删除'});
@@ -154,7 +154,7 @@
             var rows = bidDataGrid.datagrid('getSelections');
             id = rows[0].id;
         } else {//点击操作里面的删除图标会触发这个
-            userDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+            bidDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
         }
         parent.$.messager.confirm('询问', '您是否要删除当前用户？', function(b) {
             if (b) {
@@ -179,7 +179,7 @@
             var rows = bidDataGrid.datagrid('getSelections');
             id = rows[0].id;
         } else {
-            userDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
+            bidDataGrid.datagrid('unselectAll').datagrid('uncheckAll');
         }
         parent.$.modalDialog({
             title : '编辑',
@@ -203,7 +203,7 @@
     function cleanBidFun() {
         $('#searchBidForm input').val('');
         $('#searchBidForm select').val('全部');
-        userDataGrid.datagrid('load', {});
+        bidDataGrid.datagrid('load', {});
     }
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
